@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ingredia Generator</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+      min-height:100vh;
+
+      background:
+        radial-gradient(circle at top left,
+          rgba(255,130,80,0.18),
+          transparent 30%),
+
+        radial-gradient(circle at bottom right,
+          rgba(255,210,120,0.18),
+          transparent 30%),
+
+        linear-gradient(
+          135deg,
+          #fff6ee 0%,
+          #fffaf5 45%,
+          #fff4e8 100%
+        );
+
+      color:#1d1d1f;
+
+      padding:50px 24px;
+
+      overflow-x:hidden;
+
+      position:relative;
+    }
+
+    /* BLOBS */
+
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(90px);
+      opacity:0.35;
+      z-index:0;
+    }
+
+    .blob1{
+      width:280px;
+      height:280px;
+
+      background:#ff9b6a;
+
+      top:-80px;
+      left:-80px;
+    }
+
+    .blob2{
+      width:240px;
+      height:240px;
+
+      background:#ffd27d;
+
+      bottom:-60px;
+      right:-60px;
+    }
+
+    /* TOP BAR */
+
+    .topbar{
+  width:100%;
+
+  padding:28px 60px;
+
+  margin-bottom:40px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  position:relative;
+  z-index:5;
+}
+
+    .logo{
+      width:160px;
+    }
+
+    .cancel-btn{
+      text-decoration:none;
+
+      background:white;
+
+      color:#111;
+
+      padding:14px 22px;
+
+      border-radius:16px;
+
+      font-weight:600;
+
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+
+      transition:0.25s;
+    }
+
+    .cancel-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    /* MAIN */
+
+    .container{
+      width:100%;
+      max-width:900px;
+
+      margin:auto;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .title{
+      font-size:64px;
+
+      line-height:1;
+
+      letter-spacing:-3px;
+
+      margin-bottom:18px;
+
+      text-align:center;
+    }
+
+    .subtitle{
+      font-size:20px;
+
+      color:#666;
+
+      text-align:center;
+
+      line-height:1.6;
+
+      margin-bottom:50px;
+    }
+
+    /* INGREDIENT LIST */
+
+    .ingredients-wrapper{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .ingredient{
+      background:rgba(255,255,255,0.75);
+
+      backdrop-filter:blur(14px);
+
+      border:1px solid rgba(255,255,255,0.7);
+
+      border-radius:28px;
+
+      padding:24px 28px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .ingredient-name{
+      font-size:24px;
+      font-weight:700;
+    }
+
+    .ingredient-input{
+      border:none;
+      outline:none;
+
+      background:#fff3ea;
+
+      padding:16px 18px;
+
+      border-radius:16px;
+
+      width:180px;
+
+      font-size:16px;
+
+      color:#111;
+    }
+
+    .ingredient-input::placeholder{
+      color:#999;
+    }
+
+    /* BUTTON */
+
+    .generate-wrapper{
+      display:flex;
+      justify-content:center;
+
+      margin-top:50px;
+    }
+
+    .generate-btn{
+      border:none;
+
+      background:linear-gradient(
+        135deg,
+        #ff6b3d,
+        #ff9f5c
+      );
+
+      color:white;
+
+      padding:22px 40px;
+
+      border-radius:24px;
+
+      font-size:18px;
+      font-weight:700;
+
+      cursor:pointer;
+
+      transition:0.25s;
+
+      box-shadow:
+        0 10px 25px rgba(255,120,70,0.28);
+    }
+
+    .generate-btn:hover{
+      transform:translateY(-3px) scale(1.02);
+    }
+
+    /* MOBILE */
+
+    @media(max-width:700px){
+
+      .title{
+        font-size:46px;
+      }
+
+      .subtitle{
+        font-size:18px;
+      }
+
+      .ingredient{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+      }
+
+      .ingredient-input{
+        width:100%;
+      }
+
+      .topbar{
+        flex-direction:column;
+        gap:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+
+    <img src="finales-Logo.png" class="logo">
+
+    <a href="index.html" class="cancel-btn">
+      Back Home
+    </a>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <div class="title">
+      How much do you still have?
+    </div>
+
+    <div class="subtitle">
+      Add the amount you still have at home and let Ingredia create the perfect recipe for you.
+    </div>
+
+    <div
+      class="ingredients-wrapper"
+      id="ingredientsList"
+    ></div>
+
+    <div class="generate-wrapper">
+
+      <button class="generate-btn">
+        Generate Final Recipe
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+
+    const ingredients =
+      localStorage.getItem("ingredients");
+
+    const list =
+      document.getElementById("ingredientsList");
+
+    if(ingredients){
+
+      const foods =
+        ingredients.split(",");
+
+      foods.forEach(food => {
+
+        list.innerHTML += `
+
+          <div class="ingredient">
+
+            <div class="ingredient-name">
+              ${food.trim()}
+            </div>
+
+            <input
+              class="ingredient-input"
+              placeholder="e.g. 200g"
+            >
+
+          </div>
+
+        `;
+
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
