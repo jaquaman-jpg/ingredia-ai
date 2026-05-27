@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Ingredia</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
 
@@ -15,71 +21,51 @@
     }
 
     body{
-      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+      font-family:'Inter',sans-serif;
 
       min-height:100vh;
 
       background:
-        radial-gradient(circle at top left,
-          rgba(255,120,60,0.20),
-          transparent 30%),
-
-        radial-gradient(circle at bottom right,
-          rgba(255,190,90,0.16),
-          transparent 30%),
-
         linear-gradient(
-          135deg,
-          #fff6ee 0%,
-          #fffaf5 45%,
-          #fff4e8 100%
-        );
+          to bottom,
+          rgba(255,255,255,0.88),
+          rgba(255,255,255,0.92)
+        ),
+
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=80&w=2000&auto=format&fit=crop");
+
+      background-size:cover;
+      background-position:center;
 
       overflow-x:hidden;
 
-      color:#1d1d1f;
+      color:#1f1f1f;
 
       position:relative;
     }
 
-    /* HINTERGRUND */
+    /* SOFT OVERLAY */
 
-    .blob{
+    body::before{
+      content:"";
+
       position:absolute;
-      border-radius:50%;
-      filter:blur(80px);
-      opacity:0.35;
+      inset:0;
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(189,142,110,0.10),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at bottom right,
+          rgba(145,170,120,0.12),
+          transparent 30%
+        );
+
       z-index:0;
-    }
-
-    .blob1{
-      width:350px;
-      height:350px;
-
-      background:#ff9a62;
-
-      top:-100px;
-      left:-100px;
-    }
-
-    .blob2{
-      width:260px;
-      height:260px;
-
-      background:#ffd27a;
-
-      bottom:-80px;
-      right:-60px;
-    }
-
-    .blob3{
-      width:180px;
-      height:180px;
-
-      background:#ffb58f;
-
-      top:50%;
-      right:10%;
     }
 
     /* NAVBAR */
@@ -87,387 +73,479 @@
     .navbar{
       width:100%;
 
-      padding:28px 60px;
+      padding:28px 70px;
 
       display:flex;
       justify-content:space-between;
       align-items:center;
 
       position:relative;
-      z-index:5;
+      z-index:10;
     }
 
-  .nav-logo{
-  width:170px;
+    .nav-left{
+      display:flex;
+      align-items:center;
+      gap:60px;
+    }
 
-  background:transparent;
+    .logo{
+      width:185px;
 
-  mix-blend-mode:multiply;
-}
-    .nav-btn{
+      object-fit:contain;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:42px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+
+      color:#1d1d1d;
+
+      font-size:18px;
+      font-weight:500;
+
+      position:relative;
+
+      transition:0.25s;
+    }
+
+    .nav-links a::after{
+      content:"";
+
+      position:absolute;
+
+      left:0;
+      bottom:-8px;
+
+      width:0%;
+      height:2px;
+
+      background:#9c4f2d;
+
+      transition:0.25s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links .active::after{
+      width:100%;
+    }
+
+    .signup-btn{
       border:none;
 
-      background:white;
+      background:linear-gradient(
+        135deg,
+        #9f4c22,
+        #bc6b3e
+      );
 
-      padding:14px 22px;
+      color:white;
 
-      border-radius:16px;
+      padding:16px 32px;
 
-      font-size:16px;
+      border-radius:18px;
+
+      font-size:18px;
       font-weight:600;
 
       cursor:pointer;
 
-      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      box-shadow:
+        0 12px 25px rgba(159,76,34,0.18);
 
-      transition:0.25s;
-
-      text-decoration:none;
-      color:#111;
+      transition:0.3s;
     }
 
-    .nav-btn:hover{
-      transform:translateY(-2px);
+    .signup-btn:hover{
+      transform:translateY(-3px) scale(1.02);
     }
 
     /* HERO */
 
     .hero{
       width:100%;
-      max-width:1200px;
+      max-width:1350px;
 
       margin:auto;
 
-      padding:40px;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:60px;
+      padding:
+        40px
+        60px
+        90px;
 
       position:relative;
-      z-index:2;
+      z-index:5;
     }
 
-    .left{
-      flex:1;
+    /* TEXT */
+
+    .hero-text{
+      text-align:center;
+
+      margin-top:20px;
     }
 
-    .badge{
-      display:inline-flex;
+    .hero-text h1{
+      font-family:'Cormorant Garamond',serif;
+
+      font-size:110px;
+      line-height:0.92;
+
+      letter-spacing:-3px;
+
+      color:#9a421d;
+
+      margin-bottom:18px;
+    }
+
+    .hero-text p{
+      font-size:28px;
+      font-weight:500;
+
+      color:#2f2f2f;
+    }
+
+    /* CONTENT */
+
+    .hero-content{
+      margin-top:70px;
+
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+
+      gap:38px;
+
+      flex-wrap:wrap;
+    }
+
+    /* LEFT CARD */
+
+    .input-card{
+      width:100%;
+      max-width:560px;
+
+      background:rgba(255,255,255,0.78);
+
+      backdrop-filter:blur(16px);
+
+      border:1px solid rgba(255,255,255,0.8);
+
+      border-radius:34px;
+
+      padding:34px;
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .input-title{
+      font-size:38px;
+      font-weight:700;
+
+      margin-bottom:14px;
+    }
+
+    .ingredient-preview{
+      display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
 
-      background:white;
+      flex-wrap:wrap;
+
+      margin-bottom:28px;
+    }
+
+    .ingredient-preview span{
+      color:#6e6e6e;
+
+      font-size:18px;
+    }
+
+    .add-more{
+      color:#a35c38 !important;
+      font-weight:600;
+    }
+
+    textarea{
+      width:100%;
+      height:190px;
+
+      border:none;
+      outline:none;
+
+      resize:none;
+
+      border-radius:24px;
+
+      padding:24px;
+
+      background:#ffffff;
+
+      font-size:20px;
+
+      font-family:'Inter',sans-serif;
+
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.06);
+
+      margin-bottom:26px;
+    }
+
+    textarea::placeholder{
+      color:#9a9a9a;
+    }
+
+    .generate-btn{
+      width:100%;
+
+      border:none;
+
+      background:linear-gradient(
+        135deg,
+        #bc7b5e,
+        #c98d6f
+      );
+
+      color:white;
+
+      font-size:32px;
+      font-weight:600;
+
+      padding:24px;
+
+      border-radius:22px;
+
+      cursor:pointer;
+
+      transition:0.3s;
+
+      box-shadow:
+        0 12px 25px rgba(188,123,94,0.18);
+    }
+
+    .generate-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* RIGHT CARD */
+
+    .recipe-card{
+      width:100%;
+      max-width:560px;
+
+      background:rgba(255,255,255,0.78);
+
+      backdrop-filter:blur(16px);
+
+      border:1px solid rgba(255,255,255,0.8);
+
+      border-radius:34px;
+
+      overflow:hidden;
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.06);
+
+      transition:0.35s;
+    }
+
+    .recipe-card:hover{
+      transform:
+        translateY(-6px)
+        rotate(-0.4deg);
+    }
+
+    .recipe-card img{
+      width:100%;
+      height:320px;
+
+      object-fit:cover;
+    }
+
+    .recipe-content{
+      padding:28px;
+    }
+
+    .recipe-content h2{
+      font-size:48px;
+      line-height:1.05;
+
+      margin-bottom:14px;
+    }
+
+    .recipe-content p{
+      color:#555;
+
+      font-size:21px;
+      line-height:1.6;
+
+      margin-bottom:26px;
+    }
+
+    .recipe-stats{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .recipe-stats div{
+      background:#f6eee8;
+
+      color:#9d4f2d;
 
       padding:12px 18px;
 
       border-radius:999px;
 
-      margin-bottom:28px;
-
-      box-shadow:0 5px 20px rgba(0,0,0,0.05);
-
-      font-size:15px;
       font-weight:600;
-
-      color:#ff6b3d;
-    }
-
-    h1{
-      font-size:78px;
-      line-height:0.98;
-
-      letter-spacing:-4px;
-
-      margin-bottom:28px;
-    }
-
-    .subtitle{
-      font-size:22px;
-      line-height:1.6;
-
-      color:#5e5e5e;
-
-      max-width:620px;
-
-      margin-bottom:42px;
-    }
-
-    /* INPUT */
-
-    .input-box{
-      width:100%;
-      max-width:720px;
-
-      background:rgba(255,255,255,0.7);
-
-      backdrop-filter:blur(14px);
-
-      border:1px solid rgba(255,255,255,0.7);
-
-      border-radius:32px;
-
-      padding:14px;
-
-      display:flex;
-      align-items:center;
-
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.06),
-        inset 0 1px 0 rgba(255,255,255,0.8);
-
-      margin-bottom:30px;
-    }
-
-    input{
-      flex:1;
-
-      border:none;
-      outline:none;
-
-      background:transparent;
-
-      font-size:20px;
-
-      padding:20px 24px;
-
-      color:#111;
-    }
-
-    input::placeholder{
-      color:#8a8a8a;
-    }
-
-    .generate-btn{
-      border:none;
-
-      background:linear-gradient(
-        135deg,
-        #ff6b3d,
-        #ff9f5c
-      );
-
-      color:white;
-
-      padding:20px 34px;
-
-      border-radius:22px;
-
-      font-size:18px;
-      font-weight:700;
-
-      cursor:pointer;
-
-      transition:0.25s;
-
-      box-shadow:0 10px 25px rgba(255,120,70,0.30);
-    }
-
-    .generate-btn:hover{
-      transform:translateY(-3px) scale(1.02);
-    }
-
-    /* TAGS */
-
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .tag{
-      background:white;
-
-      padding:14px 22px;
-
-      border-radius:999px;
-
-      font-size:16px;
-      font-weight:600;
-
-      cursor:pointer;
-
-      transition:0.25s;
-
-      box-shadow:0 5px 16px rgba(0,0,0,0.05);
-
-  text-decoration: none;
-  color: #111;
-  display: inline-block;
-
-    }
-
-    .tag:hover{
-      background:#ff7b54;
-      color:white;
-
-      transform:translateY(-2px);
-    }
-
-    /* RECHTE SEITE */
-
-    .right{
-      flex:1;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-
-    .card{
-      width:100%;
-      max-width:430px;
-
-      background:rgba(255,255,255,0.72);
-
-      backdrop-filter:blur(16px);
-
-      border-radius:36px;
-
-      padding:30px;
-
-      border:1px solid rgba(255,255,255,0.7);
-
-      box-shadow:
-        0 15px 40px rgba(0,0,0,0.08);
-    }
-
-    .recipe-img{
-      width:100%;
-      height:240px;
-
-      object-fit:cover;
-
-      border-radius:24px;
-
-      margin-bottom:24px;
-    }
-
-    .card-title{
-      font-size:30px;
-      font-weight:700;
-
-      margin-bottom:10px;
-    }
-
-    .card-text{
-      color:#666;
-
-      line-height:1.6;
-
-      margin-bottom:24px;
-    }
-
-    .recipe-stats{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .stat{
-      background:#fff3eb;
-
-      color:#ff6b3d;
-
-      padding:10px 16px;
-
-      border-radius:14px;
-
-      font-weight:600;
-      font-size:14px;
     }
 
     /* MOBILE */
 
-    @media(max-width:980px){
+    @media(max-width:1100px){
 
-      .hero{
-        flex-direction:column;
-        text-align:center;
+      .hero-text h1{
+        font-size:82px;
       }
 
-      .left{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-      }
-
-      h1{
-        font-size:56px;
-      }
-
-      .subtitle{
-        font-size:18px;
-      }
-
-      .input-box{
-        flex-direction:column;
-        gap:12px;
-      }
-
-      .generate-btn{
-        width:100%;
+      .hero-text p{
+        font-size:24px;
       }
 
       .navbar{
         padding:24px;
       }
 
-      .nav-logo{
-        width:140px;
+      .hero{
+        padding:20px 24px 70px;
       }
 
     }
 
- </style>
+    @media(max-width:760px){
+
+      .navbar{
+        flex-direction:column;
+        gap:22px;
+      }
+
+      .nav-left{
+        flex-direction:column;
+        gap:24px;
+      }
+
+      .nav-links{
+        gap:24px;
+      }
+
+      .hero-text h1{
+        font-size:62px;
+      }
+
+      .hero-text p{
+        font-size:20px;
+      }
+
+      .input-title{
+        font-size:28px;
+      }
+
+      .generate-btn{
+        font-size:24px;
+      }
+
+      .recipe-content h2{
+        font-size:36px;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <!-- HINTERGRUND -->
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
-  <div class="blob blob3"></div>
-
   <!-- NAVBAR -->
-  <div class="navbar">
 
-    <img src="finales-Logo.png" class="nav-logo">
+  <nav class="navbar">
 
-    <a href="recipes.html" class="nav-btn">
-      Explore Recipes
-    </a>
+    <div class="nav-left">
 
-  </div>
+      <img
+        src="finales-Logo.png"
+        alt="Ingredia Logo"
+        class="logo"
+      >
+
+      <div class="nav-links">
+
+        <a href="#" class="active">
+          Home
+        </a>
+
+        <a href="#">
+          Explore Recipes
+        </a>
+
+      </div>
+
+    </div>
+
+    <button class="signup-btn">
+      Sign Up
+    </button>
+
+  </nav>
 
   <!-- HERO -->
+
   <section class="hero">
 
-    <!-- LINKS -->
-    <div class="left">
-
-      <div class="badge">
-        🍳 Smart cooking powered by AI
-      </div>
+    <div class="hero-text">
 
       <h1>
-        Cook amazing meals from ingredients you already have.
+        No more food waste.<br>
+        Cook with what you have.
       </h1>
 
-      <div class="subtitle">
-        No more “nothing to eat”.
-        Ingredia turns random ingredients into real meals, snacks and desserts in seconds.
-      </div>
+      <p>
+        Grandma’s wisdom, modern speed.
+      </p>
 
-      <!-- INPUT -->
-      <div class="input-box">
+    </div>
 
-        <input
-          type="text"
-          id="ingredientsInput"
-          placeholder="Eggs, cheese, tomatoes..."
-        >
+    <!-- CONTENT -->
+
+    <div class="hero-content">
+
+      <!-- LEFT -->
+
+      <div class="input-card">
+
+        <div class="input-title">
+          What ingredients do you have?
+        </div>
+
+        <div class="ingredient-preview">
+
+          <span>tomatoes, pasta, eggs, spinach, onion</span>
+
+          <span class="add-more">
+            + Add more
+          </span>
+
+        </div>
+
+        <textarea
+          id="ingredients"
+          placeholder="Type your ingredients here..."
+        ></textarea>
 
         <button
           class="generate-btn"
@@ -478,55 +556,36 @@
 
       </div>
 
-      <!-- TAGS -->
-      <div class="tags">
+      <!-- RIGHT -->
 
-        <a href="recipes.html#pizza" class="tag">
-  Full Meal
-</a>
-
-        <a href="recipes.html#smoothie" class="tag">
-  Snack
-</a>
-
-        <a href="recipes.html#sweet" class="tag">
-  Sweet
-</a>
-
-        <a href="recipes.html#savoury" class="tag">
-  Savoury
-</a>
-
-      </div>
-
-    </div>
-
-    <!-- RECHTS -->
-    <div class="right">
-
-      <div class="card">
+      <div class="recipe-card">
 
         <img
-          src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1200&auto=format&fit=crop"
-          class="recipe-img"
+          src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1400&auto=format&fit=crop"
+          alt="Pasta"
         >
 
-        <div class="card-title">
-          Creamy Tomato Pasta
-        </div>
+        <div class="recipe-content">
 
-        <div class="card-text">
-          Made from tomatoes, garlic, parmesan and cream.
-          Ready in 20 minutes.
-        </div>
+          <h2>
+            Creamy Tomato<br>
+            Basil Pasta
+          </h2>
 
-        <div class="recipe-stats">
+          <p>
+            Simple healthy comfort food built from ingredients
+            you already have at home.
+          </p>
 
-          <div class="stat">20 min</div>
+          <div class="recipe-stats">
 
-          <div class="stat">Easy</div>
+            <div>20 min</div>
 
-          <div class="stat">High Protein</div>
+            <div>Easy</div>
+
+            <div>Zero Waste</div>
+
+          </div>
 
         </div>
 
@@ -536,24 +595,40 @@
 
   </section>
 
-  <!-- SCRIPT -->
+  <!-- JS -->
+
   <script>
 
-    const button =
+    const generateBtn =
       document.getElementById("generateBtn");
 
-    button.addEventListener("click", () => {
+    generateBtn.addEventListener("mouseenter", () => {
+
+      generateBtn.style.transform =
+        "translateY(-3px) scale(1.01)";
+
+    });
+
+    generateBtn.addEventListener("mouseleave", () => {
+
+      generateBtn.style.transform =
+        "translateY(0px) scale(1)";
+
+    });
+
+    generateBtn.addEventListener("click", () => {
 
       const ingredients =
-        document.getElementById("ingredientsInput").value;
+        document.getElementById("ingredients").value;
 
       localStorage.setItem(
         "ingredients",
         ingredients
       );
 
-      window.location.href =
-        "generator.html";
+      alert(
+        "Ingredients saved. Next page coming soon 🚀"
+      );
 
     });
 
